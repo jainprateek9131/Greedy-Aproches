@@ -34,3 +34,26 @@ void maxMeetings(int s[], int e[], int n) {
     }
     
 }
+// ANOTHER METHOD
+static bool cmp(pair<int,int>m1, pair<int,int>m2){
+       return(m1.second<m2.second);
+   }
+   int maxMeetings(int start[], int end[], int n)
+   {
+       // Your code here
+       vector<pair<int, int>>meet;
+       int i;
+       for(i=0;i<n;i++){
+           meet.push_back({start[i], end[i]});
+       }
+       sort(meet.begin(),meet.end(),cmp);
+       pair<int,int>recent=meet[0];
+       int count = 1;
+       for(i=1;i<n;i++){
+           if(meet[i].first>recent.second){
+               count+=1;
+               recent=meet[i];
+           }
+       }
+       return count;
+   }
